@@ -2,11 +2,9 @@ from colorama import Fore, Style, init
 init()
 import string
 
-
-
 class single_board:
-    # int, int, [(int, int)] -> single_board
-    def __init__(self, length, height, lands):
+    # int, int, list[tuple(int, int)], dict{?:?} -> single_board
+    def __init__(self, length, height, lands, ships):
         self.length = length
         self.height = height
 
@@ -80,7 +78,7 @@ class single_board:
 
 
 if __name__ == "__main__":
-    myboard = single_board(6,5,[(0,1), (0,2), (3,4)])
+    myboard = single_board(6,5,[(0,1), (0,2), (3,4)], {})
 
     myboard.print_for_testing("opponent")
     myboard.print_for_testing("self")
