@@ -10,6 +10,11 @@ class Game:
         self.board1 = single_board(length, height, player1_lands, player1_ships)
         self.board2 = single_board(length, height, player2_lands, player2_ships)
 
+    # input format: "A1", "Z99", "AM138" etc
+    # str -> bool (True if valid, False if invalid)
+    def process_input(coords):
+        pass
+
     def print_for_testing(self, perspective):
         name_adjust = "    "
         if perspective == self.player1:
@@ -28,6 +33,8 @@ class Game:
 
 
 if __name__ == "__main__":
-    mygame = Game("Briar", "Bramble", 8, 6, [(1,1),(2,2),(3,3)], [(1,0),(2,0),(3,0)], {}, {})
+    ship1_briar = Ship([[0,0], [1,0], [2,0], [3,0]], 1, False)
+    ship1_bramble = Ship([[0,0], [1,0], [2,0], [3,0]], 1, False)
+    mygame = Game("Briar", "Bramble", 8, 6, [[1,1],[2,2],[3,3]], [[1,1],[2,1],[3,1]], {ship1_briar}, {ship1_bramble})
 
-    mygame.print_for_testing("Briar")
+    mygame.print_for_testing("Bramble")

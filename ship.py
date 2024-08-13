@@ -1,31 +1,39 @@
 class Ship:
-    # def __init__(self, size, bow, stern): # bow, stern -> (int, int, bool)
-    #     # True -> alive, False -> shot
-    #     ship_array = []
+    def __init__(self, coordinates, id, is_sunk):
+        ship_array = []
+        for coords in coordinates:
+            ship_array.append([coords, False])
+        self.ship_array = ship_array
+        self.id = id
+        self.is_sunk = is_sunk
 
-    #     if bow[0] == stern[0]:
-    #         for n in range(bow[1], stern[1]+1):
-    #             ship_array.append((bow[0], n, True))
-    #     elif bow[1] == stern[1]:
-    #         for n in range(bow[0], stern[0]+1):
-    #             ship_array.append((n, bow[1], True))
+    def process_hit(self, hit_coords): # register the hit and check if ship has been sunk
+        to_return = "untouched"
+        for coords_hit_list in self.ship_array:
+            if hit_coords == coords_hit_list[0]:
+                if coords_hit_list[1] == True:
+                    to_return =  "repeat hit"
+                    break
+                elif coords_hit_list[1] == False:
+                    coords_hit_list[1] = True
+                    to_return = "hit"
+                    break
 
-    #     self.ship_array = ship_array
-    #     self.size = size
-    
-    # def is_sunk(self):
-    #     for point in self.ship_array:
-    #         if point[2]:
-    #             return False
-    #     return True
+        has_untouched = False
+        for coords_hit_list in self.ship_array:
+            if coords_hit_list[1] == True:
+                has_untouched = True
+                break
+        if not has_untouched:
+            self.is_sunk = True
 
-    # def process_hit(self, coords): # coords -> (int, int)
-    #     for point in self.ship_array:
-    #         if point[0] == coords[0] and point[1] == coords[1]:
-    #             if point[2] == False:
-    #                 return "repeat_hit"
-    #             elif point[2] == True:
-    #                 return "hit"
-    #     return
 
-    def __init__(self, )
+
+if __name__ == '__main__':
+    myship = Ship([[0,0], [1,0], [2,0]], 1, False)
+    print(myship.ship_array)
+    myship.process_hit([0,0])
+    myship.process_hit([1,0])
+    myship.process_hit([2,0])
+    print(myship.ship_array)
+    print(myship.is_sunk)
