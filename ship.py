@@ -21,11 +21,13 @@ class Ship:
 
         has_untouched = False
         for coords_hit_list in self.ship_array:
-            if coords_hit_list[1] == True:
+            if coords_hit_list[1] == False:
                 has_untouched = True
                 break
         if not has_untouched:
             self.is_sunk = True
+        
+        return to_return
 
 
 

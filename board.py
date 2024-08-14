@@ -28,13 +28,21 @@ class single_board:
         self.lands = lands
         self.ships = ships
 
-    # list[int, int] -> void
+    # list[int, int] -> bool
     def process_hit(self, coords):
         for ship in self.ships:
             result = ship.process_hit(coords)
-            print(result)
+            # print(result)
             if result != "untouched":
                 break
+
+        if result == "untouched" and self.board[coords[0]][coords[1]][0] != 'L':
+            self.board[coords[0]][coords[1]] = ['O', 'placeholder']
+        if "hit" in result:
+            self.board[coords[0]][coords[1]][1] = True
+        #     self.board[coords[0]][coords[1]] = ['X', 'placeholder']
+
+        return result
 
     # -> bool
     def lost_game(self):
@@ -95,11 +103,13 @@ class single_board:
                     if data == True: # hit -> show
                         output = Fore.RED + sym + Style.RESET_ALL
                     elif data == False and perspective == "self": # not hit && self board -> show
-                        output = sym
+                        output = Fore.WHITE + sym + Style.RESET_ALL
                     else: # not hit && opponent board -> no show
                         output = ' '
+                elif sym == 'O':
+                    output = Fore.WHITE + sym + Style.RESET_ALL
                 else:
-                    output = Fore.RED + sym + Style.RESET_ALL
+                    output = Fore.WHITE + sym + Style.RESET_ALL
                 line += (' ' + output + ' |')
             print(line)
             print_bar()
