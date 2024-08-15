@@ -8,7 +8,7 @@ class Ship:
         self.is_sunk = is_sunk
 
     def process_hit(self, hit_coords): # register the hit and check if ship has been sunk
-        to_return = "untouched"
+        to_return = "miss"
         for coords_hit_list in self.ship_array:
             if hit_coords == coords_hit_list[0]:
                 if coords_hit_list[1] == True:
@@ -19,12 +19,12 @@ class Ship:
                     to_return = "hit"
                     break
 
-        has_untouched = False
+        has_miss = False
         for coords_hit_list in self.ship_array:
             if coords_hit_list[1] == False:
-                has_untouched = True
+                has_miss = True
                 break
-        if not has_untouched:
+        if not has_miss:
             self.is_sunk = True
         
         return to_return

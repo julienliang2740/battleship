@@ -12,7 +12,7 @@ class Game:
         self.board2 = single_board(length, height, player2_lands, player2_ships)
 
     # input format: "A1", "Z99", "AM138" etc
-    # str -> bool (True if valid, False if invalid)
+    # str -> str ("bad_input", "miss", "hit", "repeat", "land")
     def process_input(self, input, target_player):
         ## check if it's valid first
         length_coord = 0
@@ -23,7 +23,7 @@ class Game:
         pattern  = r'^[A-Z]+\d+$'
         if not bool(re.match(pattern, input)):
             print("invalid input - formatting problem")
-            return False
+            return "bad_input"
 
         for ch in input:
             if ch not in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']:
@@ -41,7 +41,7 @@ class Game:
 
         if length_coord > (self.length-1) or length_coord < 0 or height_coord < 0 or height_coord > (self.height-1):
             print("invalid input - out of bounds")
-            return False
+            return "bad_input"
         # print(f"({length_coord}, {height_coord})")
 
         ## putting the input through to the game
@@ -54,7 +54,7 @@ class Game:
             self.print_for_testing(self.player1)
         print(f"====={result}=====")
 
-        return True
+        return result
 
     def print_for_testing(self, perspective):
         name_adjust = "    "

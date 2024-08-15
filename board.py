@@ -28,15 +28,23 @@ class single_board:
         self.lands = lands
         self.ships = ships
 
+        self.hit_list = [] # list of coords that have already been shot at
+
     # list[int, int] -> bool
     def process_hit(self, coords):
+        if self.board[coords[0]][coords[1]][0] == 'L':
+            return "land"
+        if coords in self.hit_list:
+            return "repeat"
+        self.hit_list.append(coords)
+
         for ship in self.ships:
             result = ship.process_hit(coords)
             # print(result)
-            if result != "untouched":
+            if result != "miss":
                 break
 
-        if result == "untouched" and self.board[coords[0]][coords[1]][0] != 'L':
+        if result == "miss" and self.board[coords[0]][coords[1]][0] != 'L':
             self.board[coords[0]][coords[1]] = ['O', 'placeholder']
         if "hit" in result:
             self.board[coords[0]][coords[1]][1] = True
