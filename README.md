@@ -14,6 +14,7 @@ A classic game of **Battleship**, reimagined for the terminal — featuring an *
 git clone https://github.com/julienliang2740/battleship.git
 cd battleship
 python main.py
+```
 
 ## ⚙️ Customizing the Board Size
 To change the board dimensions:
