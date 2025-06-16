@@ -14,3 +14,12 @@ A classic game of **Battleship**, reimagined for the terminal — featuring an *
 git clone https://github.com/julienliang2740/battleship.git
 cd battleship
 python main.py
+
+## ⚙️ Customizing the Board Size
+To change the board dimensions:
+
+Open the scenario file (currently scenarios/default.json) 
+Modify the length and height fields to set your desired board size.
+
+You can also create your own scenario files — just make sure they follow the same format as default.json. Then you can load them into the game manually or modify the code to use them by default.
+
